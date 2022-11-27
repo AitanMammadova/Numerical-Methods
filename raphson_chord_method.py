@@ -1,10 +1,10 @@
-from sympy import *
+from sympy import lambdify, symbols
 
 def function(x):
     function = pow(x,3)+3*pow(x,2)-1
+    # function = pow(x,3) - 5 * x + 1
     # function = pow(x,3)-x+1
     return function
-
 
 def check(a, b, function):
     t = function(a) * function(b)
@@ -24,6 +24,7 @@ def define_plus_minus(a, b, function):
 
 def define_x0(f_2, function, p_m):
     global x1
+    global x0
     if f_2(p_m[0])*function(p_m[0]) > 0:
         x0 = p_m[0]
         x1 = p_m[1]
@@ -81,15 +82,15 @@ b = float(input('b = '))
 
 x = symbols('x')
 func = function(x)
-f_1 = func.diff(x)
-f_2 = func.diff(x,2)
+f_1 = func.diff(x)  # type: ignore
+f_2 = func.diff(x,2)  # type: ignore
 func = lambdify(x, func)
 f_1 = lambdify(x, f_1)
 f_2 = lambdify(x, f_2)
 
 iter = int(input('Iterasiyalarin sayini daxil edin : '))
-
-method = int(input("\nToxunanlar usulu ucun:1 \nVeterler usulu ucun: 2 \nToxunanlar ve Veterler usulu ucun: 3\n"))
+print('\nToxunanlar usulu ucun:1 \nVeterler usulu ucun: 2 \nToxunanlar ve Veterler usulu ucun: 3\n')
+method = int(input())
 
 match(method):
     case 1:
